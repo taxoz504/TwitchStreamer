@@ -67,5 +67,18 @@
     <None Include="Resources\credits.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Libs\csfml-audio-2.dll" />
+    <None Include="Libs\csfml-graphics-2.dll" />
+    <None Include="Libs\csfml-network-2.dll" />
+    <None Include="Libs\csfml-system-2.dll" />
+    <None Include="Libs\csfml-window-2.dll" />
+    <None Include="Libs\libsndfile-1.dll" />
+    <None Include="Libs\openal32.dll" />
+    <None Include="Libs\OpenTK.Compatibility.dll" />
+    <None Include="Libs\OpenTK.dll" />
+    <None Include="Libs\sfmlnet-audio-2.dll" />
+    <None Include="Libs\sfmlnet-graphics-2.dll" />
+    <None Include="Libs\sfmlnet-system-2.dll" />
+    <None Include="Libs\sfmlnet-window-2.dll" />
   </ItemGroup>
 </Project>

@@ -47,7 +47,7 @@ namespace SGUI
 
 		void MouseButtonReleased ()
 		{
-			
+			Globals.headerLocked = false;
 		}
 
 		void MouseButtonPressed ()
@@ -59,6 +59,7 @@ namespace SGUI
 			if (mouseRect.IntersectsWith (headerRect))  
 			{
 				Globals.mouseOffset = base.InternalGetMousePosition ();
+				Globals.headerLocked = true;
 			}
 		}
 
@@ -200,7 +201,7 @@ namespace SGUI
 			if (Globals.mouseDown) {
 				Globals.mouseRect.FillColor = Color.Blue;
 
-				if (Globals.headerlocked) {
+				if (Globals.headerLocked) {
 					base.Position = new Vector2i(Mouse.GetPosition ().X - Globals.mouseOffset.X, Mouse.GetPosition ().Y - Globals.mouseOffset.Y);
 				}
 

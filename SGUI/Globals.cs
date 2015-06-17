@@ -19,7 +19,7 @@ namespace SGUI
 		//Mouse
 		public static bool mouseDown = false;
 		public static bool mouseFirst = false;
-		public static bool headerlocked = false;
+		public static bool headerLocked = false;
 		public static Vector2i mouseOffset = new Vector2i(0,0);
 		public static RectangleShape mouseRect;
 
