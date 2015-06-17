@@ -56,7 +56,7 @@ namespace SGUI
 			System.Drawing.RectangleF headerRect = new System.Drawing.RectangleF (Globals.rects[1]["header"].Position.X, Globals.rects[1]["header"].Position.Y, Globals.rects[1]["header"].Size.X, Globals.rects[1]["header"].Size.Y);
 
 
-			if (mouseRect.IntersectsWith (headerRect))  
+			if (mouseRect.IntersectsWith (headerRect))   
 			{
 				Globals.mouseOffset = base.InternalGetMousePosition ();
 				Globals.headerLocked = true;
@@ -107,7 +107,7 @@ namespace SGUI
 
 			RectangleShape Header= new RectangleShape(new Vector2f(Globals.width, 95f));
 			Header.FillColor = new Color (100-10, 65-10, 165-10);
-			Header.Position = new Vector2f (0f, 0f);
+			Header.Position = new Vector2f (0f, 0f); 
 			Globals.rects[1].Add ("header", Header);
 			AnimatePos ("header",1, new Vector2f (0f, -95f), new Vector2f (0f,0f), 2f);
 
@@ -141,6 +141,10 @@ namespace SGUI
 			ButtonBG.Position = new Vector2f (0f, 0f);
 			Globals.rects[0].Add ("buttonBG", ButtonBG);
 			AnimatePos ("buttonBG",0, new Vector2f (0f, Globals.height), new Vector2f (0f,newpos), 2f);
+
+
+			Globals.btns.Add(new Button("Test!", 200,200,130,50));
+
 
 			#endregion
 
@@ -241,6 +245,13 @@ namespace SGUI
 			//base.Draw (Globals.texts);
 
 			//base.Draw (logo);
+
+			//Globals.btn.Draw (this);
+
+			Globals.btns.ForEach (delegate(Button btn){
+				btn.Draw(this);
+			});
+
 
 			base.Draw (Globals.mouseRect);
 

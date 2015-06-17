@@ -15,6 +15,8 @@ namespace SGUI
 		//Rectangles objects
 		public static Dictionary<string, RectangleShape>[] rects = new Dictionary<string, RectangleShape>[byte.MaxValue];
 		public static Dictionary<string, Text> texts = new Dictionary<string, Text> ();
+		public static List<Button> btns = new List<Button>();
+		//public static Button btn = new Button("Test", 20,20,100,50);
 
 		//Mouse
 		public static bool mouseDown = false;
