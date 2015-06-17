@@ -55,6 +55,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Libs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Twitch_Logo.png">
