@@ -52,6 +52,7 @@
     <Compile Include="Form.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Buttons\ExitBtn.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -82,5 +83,8 @@
     <None Include="Libs\sfmlnet-graphics-2.dll" />
     <None Include="Libs\sfmlnet-system-2.dll" />
     <None Include="Libs\sfmlnet-window-2.dll" />
+    <None Include="Resources\Shadow1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

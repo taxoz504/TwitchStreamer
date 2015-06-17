@@ -25,9 +25,14 @@ namespace SGUI
 		public static Vector2i mouseOffset = new Vector2i(0,0);
 		public static RectangleShape mouseRect;
 
+		//Fonts
+		public static Font mainFont = new Font("Resources/Numans-Regular.ttf");
 
-
-
+		//Colors
+		public static Color TwitchPurple = new Color(100,65,165);
+		public static Color TwitchPurplePanel = new Color(100-10, 65-10, 165-10);
+		public static Color TwitchLightGrey = new Color(241,241,241);
+		public static Color ButtonColor = new Color (100-20, 65-20, 165-20);
 
 	}
 }

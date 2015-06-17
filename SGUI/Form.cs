@@ -13,7 +13,7 @@ namespace SGUI
 	{
 		#region Variables
 			//RectangleShape line;
-		Sprite logo;
+		//Sprite logo;
 		#endregion
 
 		public Form () : base(new VideoMode(Globals.width,Globals.height), Globals.title, Styles.None)
@@ -36,7 +36,7 @@ namespace SGUI
 				Update ();
 
 				//Draw
-				base.Clear (new Color(100,65,165));
+				base.Clear (Globals.TwitchPurple);
 				base.DispatchEvents ();
 				Draw ();
 				base.Display ();
@@ -99,14 +99,14 @@ namespace SGUI
 			#region Header
 
 			RectangleShape line = new RectangleShape (new Vector2f (Globals.width, 2));
-			line.FillColor = new Color (241,241,241);
+			line.FillColor = Globals.TwitchLightGrey;
 			line.Position = new Vector2f (0, 95);
 			//Globals.rects.Add(10, Globals.rects[10].Add ("line", line));
 			Globals.rects[10].Add("line", line);
 			AnimatePos ("line",10, new Vector2f ((float)Globals.width, 95f), new Vector2f (0f,95f), 2f);
 
 			RectangleShape Header= new RectangleShape(new Vector2f(Globals.width, 95f));
-			Header.FillColor = new Color (100-10, 65-10, 165-10);
+			Header.FillColor = Globals.TwitchPurplePanel;
 			Header.Position = new Vector2f (0f, 0f); 
 			Globals.rects[1].Add ("header", Header);
 			AnimatePos ("header",1, new Vector2f (0f, -95f), new Vector2f (0f,0f), 2f);
@@ -120,7 +120,7 @@ namespace SGUI
 			Globals.rects[2].Add ("logo", logoRect);
 			AnimatePos ("logo",2, new Vector2f (10f, -95f), new Vector2f (10f,10f), 2f);
 
-			Globals.texts.Add("version", new Text("Streamer " + Globals.version, new Font("Resources/Numans-Regular.ttf"), 24));
+			Globals.texts.Add("version", new Text("Streamer " + Globals.version, Globals.mainFont, 24));
 			Globals.texts["version"].Position = new Vector2f(210f, 60f);
 			AnimatePos("version", new Vector2f (Globals.width, 60f), new Vector2f (210f,60f), 2f);
 
@@ -131,19 +131,19 @@ namespace SGUI
 			float newpos = Globals.height - 65f;
 
 			RectangleShape line2 = new RectangleShape (new Vector2f (Globals.width, 2));
-			line2.FillColor = new Color (241,241,241);
+			line2.FillColor = Globals.TwitchLightGrey;
 			line2.Position = new Vector2f (0, 95);
 			Globals.rects[10].Add ("line2", line2);
 			AnimatePos ("line2",10, new Vector2f (-(float)Globals.width, newpos), new Vector2f (0f,newpos), 2f);
 
 			RectangleShape ButtonBG= new RectangleShape(new Vector2f(Globals.width, 65f));
-			ButtonBG.FillColor = new Color (100-10, 65-10, 165-10);
+			ButtonBG.FillColor = Globals.TwitchPurplePanel;
 			ButtonBG.Position = new Vector2f (0f, 0f);
 			Globals.rects[0].Add ("buttonBG", ButtonBG);
 			AnimatePos ("buttonBG",0, new Vector2f (0f, Globals.height), new Vector2f (0f,newpos), 2f);
 
 
-			Globals.btns.Add(new Button("Test!", 200,200,130,50));
+			Globals.btns.Add(new ExitBtn());
 
 
 			#endregion
@@ -202,20 +202,35 @@ namespace SGUI
 				Globals.mouseDown = false;
 			}
 
+			//Button interactions
+			foreach (var btn in Globals.btns) {
+				if (mouseRect.IntersectsWith(btn.rect)) {
+					if (btn.mouseOver == false) {
+						btn.MouseEnter ();
+						btn.mouseOver = true;
+					}else{
+						btn.MouseOver ();
+						if (Globals.mouseDown) {
+							btn.MouseDown ();
+						}
+					}
+
+
+				}else{
+					if (btn.mouseOver == true) {
+						btn.MouseLeave ();
+						btn.mouseOver = false;
+					}
+				}
+			}
+
+
 			if (Globals.mouseDown) {
 				Globals.mouseRect.FillColor = Color.Blue;
 
 				if (Globals.headerLocked) {
 					base.Position = new Vector2i(Mouse.GetPosition ().X - Globals.mouseOffset.X, Mouse.GetPosition ().Y - Globals.mouseOffset.Y);
 				}
-
-
-				//Header
-				/*
-				if (mouseRect.IntersectsWith(headerRect)) {
-					base.Position = new Vector2i(Mouse.GetPosition ().X - Globals.mouseOffset.X, Mouse.GetPosition ().Y - Globals.mouseOffset.Y);
-				}
-				*/
 
 			}else{
 				Globals.mouseRect.FillColor = Color.White;
