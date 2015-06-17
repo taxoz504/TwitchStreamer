@@ -26,8 +26,8 @@ namespace SGUI
 			base.KeyPressed += KeyPressed;
 			base.KeyReleased += KeyReleased;
 			base.MouseMoved += MouseMoved;
-			base.MouseButtonPressed += MouseButtonPressed;
-			base.MouseButtonReleased += MouseButtonReleased;
+			//base.MouseButtonPressed += MouseButtonPressed;
+			//base.MouseButtonReleased += MouseButtonReleased;
 
 			base.SetFramerateLimit (60);
 
@@ -45,15 +45,21 @@ namespace SGUI
 			Unload ();
 		}
 
-		void MouseButtonReleased (object sender, MouseButtonEventArgs e)
+		void MouseButtonReleased ()
 		{
 			
 		}
 
-		void MouseButtonPressed (object sender, MouseButtonEventArgs e)
+		void MouseButtonPressed ()
 		{
-			//Globals.mouseDown = e.Button.
-			//Globals.mouseOffset = base.InternalGetMousePosition ();
+			System.Drawing.RectangleF mouseRect = new System.Drawing.RectangleF (Globals.mouseRect.Position.X, Globals.mouseRect.Position.Y, Globals.mouseRect.Size.X, Globals.mouseRect.Size.Y);
+			System.Drawing.RectangleF headerRect = new System.Drawing.RectangleF (Globals.rects[1]["header"].Position.X, Globals.rects[1]["header"].Position.Y, Globals.rects[1]["header"].Size.X, Globals.rects[1]["header"].Size.Y);
+
+
+			if (mouseRect.IntersectsWith (headerRect))  
+			{
+				Globals.mouseOffset = base.InternalGetMousePosition ();
+			}
 		}
 
 		void MouseMoved (object sender, MouseMoveEventArgs e)
@@ -144,7 +150,7 @@ namespace SGUI
 			//Credits.Position = new Vector2f (0f, 0f);
 			Credits.Texture = credTex;
 			Globals.rects[0].Add ("credits", Credits);
-			AnimatePos ("credits",0, new Vector2f (Globals.width, 95f), new Vector2f (Globals.width-Credits.Size.X,95f), 2f);
+			AnimatePos ("credits",0, new Vector2f (Globals.width, 95f), new Vector2f (Globals.width-Credits.Size.X,97f), 2f);
 
 			//Globals.texts.Add("credits", new Text("Hello!!", new Font("Resources/Numans-Regular.ttf"), 14));
 			//Globals.texts["version"].Position = new Vector2f(210f, 60f);
@@ -167,11 +173,24 @@ namespace SGUI
 			if (base.HasFocus()) {
 
 				//First call
+				if (Mouse.IsButtonPressed (Mouse.Button.Left) == true && Globals.mouseDown == false) {
+					MouseButtonPressed ();
+					//Globals.mouseOffset = base.InternalGetMousePosition ();
+				}
+
+				//released
+				if (Mouse.IsButtonPressed (Mouse.Button.Left) == false && Globals.mouseDown == true) {
+					MouseButtonReleased ();
+				}
+
+				/*
 				if (mouseRect.IntersectsWith (headerRect)) {
 					if (Mouse.IsButtonPressed (Mouse.Button.Left) == true && Globals.mouseDown == false) {
+						//MouseButtonPressed ();
 						Globals.mouseOffset = base.InternalGetMousePosition ();
 					}
 				}
+				*/
 
 				Globals.mouseDown = Mouse.IsButtonPressed (Mouse.Button.Left);
 			}else{
@@ -181,12 +200,17 @@ namespace SGUI
 			if (Globals.mouseDown) {
 				Globals.mouseRect.FillColor = Color.Blue;
 
-
-				//Header
-				if (mouseRect.IntersectsWith(headerRect)) {
+				if (Globals.headerlocked) {
 					base.Position = new Vector2i(Mouse.GetPosition ().X - Globals.mouseOffset.X, Mouse.GetPosition ().Y - Globals.mouseOffset.Y);
 				}
 
+
+				//Header
+				/*
+				if (mouseRect.IntersectsWith(headerRect)) {
+					base.Position = new Vector2i(Mouse.GetPosition ().X - Globals.mouseOffset.X, Mouse.GetPosition ().Y - Globals.mouseOffset.Y);
+				}
+				*/
 
 			}else{
 				Globals.mouseRect.FillColor = Color.White;
