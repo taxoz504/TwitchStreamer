@@ -69,6 +69,14 @@ namespace SGUI
 
 			Vector2f step = new Vector2f (delta.X/100f, delta.Y/100f);
 
+			/*
+			while (Globals.pageTurning == true) {
+				
+			}
+
+			Globals.pageTurning = true;
+*/
+
 			Clock clock = new Clock ();
 			while (clock.ElapsedTime.AsSeconds() <= time) {
 
@@ -87,6 +95,10 @@ namespace SGUI
 
 
 			}
+
+
+			//Globals.pageTurning = false;
+
 		}
 
 

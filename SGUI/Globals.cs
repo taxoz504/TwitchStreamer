@@ -14,6 +14,7 @@ namespace SGUI
 		public static uint height		= 345;
 		public static string version 	= "v1.06";
 		public static bool shouldClose 	= false;
+		public static bool pageTurning	= false;
 		public static string lockedControl;
 
 		//Rectangles objects

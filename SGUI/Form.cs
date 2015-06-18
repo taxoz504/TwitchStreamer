@@ -164,6 +164,13 @@ namespace SGUI
 
 			Globals.btns.Add(new ExitBtn());
 			Globals.btns.Add(new SettingsBtn());
+			Globals.btns.Add(new WatchBtn());
+
+			//In pages
+			Globals.points.Add("backBtnPoint", new Vector2f(Globals.width*2-115,20));
+			Globals.btns.Add(new BackBtn());
+
+
 
 			#endregion
 
@@ -281,9 +288,11 @@ namespace SGUI
 
 			//LOCKING PAGES
 			//Credits
-			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X, Globals.rects [0] ["credits"].Position.Y);
+			//Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X, Globals.rects [0] ["credits"].Position.Y);
 			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X,Globals.points ["creditsPoint"].Y + Globals.points ["mainPage"].Y );
-
+			Globals.points["backBtn"] = Globals.points["backBtnPoint"] + Globals.points ["mainPage"];
+			//Globals.btns[2].rect.X = Globals.points["backBtnPoint"].X + Globals.points ["mainPage"].X;
+			//Globals.btns[2].rect.Y = Globals.points["backBtnPoint"].Y + Globals.points ["mainPage"].Y;
 
 
 		}
@@ -332,8 +341,11 @@ namespace SGUI
 
 		public static void AnimatePos(string pointKey, bool rnd , Vector2f start, Vector2f stop, float time)
 		{
-			Thread AnimThread = new Thread (() => Animation.animatePosition(pointKey, rnd ,start,stop,time));
-			AnimThread.Start ();
+			//if (Globals.pageTurning == false) {
+				Thread AnimThread = new Thread (() => Animation.animatePosition(pointKey, rnd ,start,stop,time));
+				AnimThread.Start ();
+				
+			//}
 		}
 
 
