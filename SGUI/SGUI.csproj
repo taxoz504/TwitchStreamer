@@ -56,6 +56,8 @@
     <Compile Include="Buttons\SettingsBtn.cs" />
     <Compile Include="Buttons\BackBtn.cs" />
     <Compile Include="Buttons\WatchBtn.cs" />
+    <Compile Include="Buttons\AddBtn.cs" />
+    <Compile Include="Buttons\DeleteBtn.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

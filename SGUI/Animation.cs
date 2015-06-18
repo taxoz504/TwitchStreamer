@@ -28,9 +28,13 @@ namespace SGUI
 					start.X + stepsToAdd*step.X,//X
 					start.Y + stepsToAdd*step.Y//Y
 				);
-
-
+					
 			}
+
+
+			Globals.rects [layer] [shapeKey].Position = stop;
+
+
 		}
 
 
@@ -59,6 +63,9 @@ namespace SGUI
 
 
 			}
+
+			Globals.texts [textKey].Position = stop;
+
 		}
 
 
@@ -93,9 +100,9 @@ namespace SGUI
 					start.Y + stepsToAdd*step.Y//Y
 				);
 
-
 			}
 
+			Globals.points [pointKey] = stop;
 
 			//Globals.pageTurning = false;
 

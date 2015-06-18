@@ -29,7 +29,11 @@ namespace SGUI
 			//Globals.MainForm.Close ();
 			//Globals.shouldClose = true;
 
-			Form.AnimatePos ("mainPage", true, new Vector2f(Globals.points["mainPage"].X,0), new Vector2f(-Globals.width - 1,0), 2f);
+			if (Globals.points["mainPage"].X == 0) {
+				
+				Form.AnimatePos ("mainPage", true, new Vector2f(Globals.points["mainPage"].X,0), new Vector2f(-Globals.width - 1,0), 1.5f);
+			}
+
 
 
 			mouseDown = false;

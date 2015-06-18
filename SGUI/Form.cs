@@ -167,9 +167,17 @@ namespace SGUI
 			Globals.btns.Add(new WatchBtn());
 
 			//In pages
+			//Back button
 			Globals.points.Add("backBtnPoint", new Vector2f(Globals.width*2-115,20));
 			Globals.btns.Add(new BackBtn());
 
+			//Add button
+			Globals.points.Add("addBtnPoint", new Vector2f(0,0));
+			Globals.btns.Add(new AddBtn());
+
+			//Delete button
+			Globals.points.Add("deleteBtnPoint", new Vector2f(0,0));
+			Globals.btns.Add(new DeleteBtn());
 
 
 			#endregion
@@ -291,8 +299,8 @@ namespace SGUI
 			//Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X, Globals.rects [0] ["credits"].Position.Y);
 			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X,Globals.points ["creditsPoint"].Y + Globals.points ["mainPage"].Y );
 			Globals.points["backBtn"] = Globals.points["backBtnPoint"] + Globals.points ["mainPage"];
-			//Globals.btns[2].rect.X = Globals.points["backBtnPoint"].X + Globals.points ["mainPage"].X;
-			//Globals.btns[2].rect.Y = Globals.points["backBtnPoint"].Y + Globals.points ["mainPage"].Y;
+			Globals.points ["addBtn"] = Globals.points ["addBtnPoint"] + Globals.points ["mainPage"];
+			Globals.points ["deleteBtn"] = Globals.points ["deleteBtnPoint"] + Globals.points ["mainPage"];
 
 
 		}
