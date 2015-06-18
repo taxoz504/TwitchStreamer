@@ -44,6 +44,7 @@ namespace SGUI
 		{
 			base.mouseDown = true;
 			base.buttonColor = Globals.ButtonDownColor;
+			Globals.lockedControl = "";
 		}
 
 		public override void MouseEnter()

@@ -15,14 +15,16 @@ namespace SGUI
 		public static string version 	= "v1.06";
 		public static bool shouldClose 	= false;
 		public static bool pageTurning	= false;
-		public static string lockedControl;
+		public static string lockedControl = "";
 
 		//Rectangles objects
 		public static Dictionary<string, RectangleShape>[] rects = new Dictionary<string, RectangleShape>[byte.MaxValue];
 		public static Dictionary<string, Text> texts = new Dictionary<string, Text> ();
 		public static Dictionary<string, Vector2f> points = new Dictionary<string, Vector2f> ();
+		public static List<TextBox> txtBoxes = new List<TextBox> ();
 		public static List<Button> btns = new List<Button>();
 		//public static Button btn = new Button("Test", 20,20,100,50);
+		//public static Dictionary<string, TextBox> txtBoxes = new Dictionary<string, TextBox> ();
 
 		//Mouse
 		public static bool mouseDown = false;
@@ -40,6 +42,11 @@ namespace SGUI
 		public static Color TwitchLightGrey = new Color(241,241,241);
 		public static Color ButtonColor = new Color (100-20, 65-20, 165-20);
 		public static Color ButtonDownColor = new Color (100-30, 65-30, 165-30);
+
+
+		//public static TextBox txtBox = new TextBox ("test", new FloatRect (12, 126,250, 26));
+
+
 
 	}
 }

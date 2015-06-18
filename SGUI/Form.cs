@@ -26,6 +26,7 @@ namespace SGUI
 			base.KeyPressed += KeyPressed;
 			base.KeyReleased += KeyReleased;
 			base.MouseMoved += MouseMoved;
+			base.TextEntered += TextEntered;
 			//base.MouseButtonPressed += MouseButtonPressed;
 			//base.MouseButtonReleased += MouseButtonReleased;
 
@@ -45,6 +46,19 @@ namespace SGUI
 			Unload ();
 		}
 
+		void TextEntered (object sender, TextEventArgs e)
+		{
+			//Targetted control
+			if (Globals.lockedControl != "") {
+				Globals.txtBoxes.ForEach (delegate(TextBox txt){
+					if (txt.name == Globals.lockedControl) {
+						txt.KeyPress(e);
+					}
+				});
+			}
+
+		}
+
 		void MouseButtonReleased ()
 		{
 			Globals.headerLocked = false;
@@ -57,6 +71,13 @@ namespace SGUI
 					
 				}
 
+			});
+
+			Globals.txtBoxes.ForEach (delegate(TextBox txt){
+				if (mouseRect.IntersectsWith(new System.Drawing.RectangleF(txt.rect.Position.X, txt.rect.Position.Y, txt.rect.Size.X, txt.rect.Size.Y))) {
+					Globals.lockedControl = txt.name;
+					//this.SetTitle(Globals.lockedControl);
+				}
 			});
 
 
@@ -79,6 +100,8 @@ namespace SGUI
 
 
 
+
+
 		}
 
 		void MouseMoved (object sender, MouseMoveEventArgs e)
@@ -91,10 +114,23 @@ namespace SGUI
 			if (e.Code == Keyboard.Key.Escape) {
 				base.Close ();
 			}
+
+
+
+
 		}
 
 		void KeyPressed (object sender, KeyEventArgs e)
 		{
+
+			//Targetted control
+			if (Globals.lockedControl != "") {
+				Globals.txtBoxes.ForEach (delegate(TextBox txt){
+					if (txt.name == Globals.lockedControl) {
+						txt.SpecialKey(e);
+					}
+				});
+			}
 			
 		}
 
@@ -179,6 +215,9 @@ namespace SGUI
 			Globals.points.Add("deleteBtnPoint", new Vector2f(0,0));
 			Globals.btns.Add(new DeleteBtn());
 
+			Globals.points.Add("txtNamePoint", new Vector2f(0,0));
+			Globals.txtBoxes.Add(new TextBox ("txtName", new FloatRect (12, 126,250, 26)));
+			AnimatePos("txtNamePoint", true, new Vector2f(-260, 126), new Vector2f(12, 126), 2f);
 
 			#endregion
 
@@ -293,6 +332,10 @@ namespace SGUI
 				btn.Update();
 			});
 
+			Globals.txtBoxes.ForEach (delegate(TextBox txt){
+				txt.Update();
+			});
+
 
 			//LOCKING PAGES
 			//Credits
@@ -301,6 +344,7 @@ namespace SGUI
 			Globals.points["backBtn"] = Globals.points["backBtnPoint"] + Globals.points ["mainPage"];
 			Globals.points ["addBtn"] = Globals.points ["addBtnPoint"] + Globals.points ["mainPage"];
 			Globals.points ["deleteBtn"] = Globals.points ["deleteBtnPoint"] + Globals.points ["mainPage"];
+			
 
 
 		}
@@ -320,9 +364,19 @@ namespace SGUI
 			}
 				
 
+			Globals.txtBoxes.ForEach (delegate(TextBox txt){
+				txt.Draw(this);
+			});
+
+			//Globals.txtBoxes.Values.
+
+
 			Globals.btns.ForEach (delegate(Button btn){
 				btn.Draw(this);
 			});
+
+
+			//Globals.txtBox.Draw (this);
 
 
 			base.Draw (Globals.mouseRect);

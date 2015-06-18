@@ -7,8 +7,8 @@ namespace SGUI
 	public class WatchBtn : Button
 	{
 
-
-		public WatchBtn () : base("Watch", 218, 292,95,41)
+		//(int)Globals.width/2 - 95/2, 292,95,41
+		public WatchBtn () : base("Watch", (int)Globals.width/2 - 95/2, 292, 95, 41)
 		{
 			base.xOffset = 75;
 

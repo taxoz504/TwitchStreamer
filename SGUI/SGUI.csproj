@@ -58,6 +58,7 @@
     <Compile Include="Buttons\WatchBtn.cs" />
     <Compile Include="Buttons\AddBtn.cs" />
     <Compile Include="Buttons\DeleteBtn.cs" />
+    <Compile Include="TextBox.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +93,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\credits.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\txtShadow1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
