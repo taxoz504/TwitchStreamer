@@ -53,6 +53,7 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Buttons\ExitBtn.cs" />
+    <Compile Include="Buttons\SettingsBtn.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -65,9 +66,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Numans-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\credits.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Libs\csfml-audio-2.dll" />
@@ -84,6 +82,12 @@
     <None Include="Libs\sfmlnet-system-2.dll" />
     <None Include="Libs\sfmlnet-window-2.dll" />
     <None Include="Resources\Shadow1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\InnerShadow1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\credits.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

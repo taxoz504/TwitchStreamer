@@ -18,7 +18,9 @@ namespace SGUI
 
 
 			//open form
-			Form MainForm = new Form ();
+			Globals.MainForm = new Form ();
+
+
 
 			/*
 			sw = new Stopwatch ();

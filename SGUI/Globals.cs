@@ -7,14 +7,19 @@ namespace SGUI
 {
 	public static class Globals
 	{
+		public static Form MainForm;
+
 		public static string title		= "Twitch Streamer";
 		public static uint width		= 527;
 		public static uint height		= 345;
 		public static string version 	= "v1.06";
+		public static bool shouldClose 	= false;
+		public static string lockedControl;
 
 		//Rectangles objects
 		public static Dictionary<string, RectangleShape>[] rects = new Dictionary<string, RectangleShape>[byte.MaxValue];
 		public static Dictionary<string, Text> texts = new Dictionary<string, Text> ();
+		public static Dictionary<string, Vector2f> points = new Dictionary<string, Vector2f> ();
 		public static List<Button> btns = new List<Button>();
 		//public static Button btn = new Button("Test", 20,20,100,50);
 
@@ -33,6 +38,7 @@ namespace SGUI
 		public static Color TwitchPurplePanel = new Color(100-10, 65-10, 165-10);
 		public static Color TwitchLightGrey = new Color(241,241,241);
 		public static Color ButtonColor = new Color (100-20, 65-20, 165-20);
+		public static Color ButtonDownColor = new Color (100-30, 65-30, 165-30);
 
 	}
 }

@@ -48,6 +48,20 @@ namespace SGUI
 		void MouseButtonReleased ()
 		{
 			Globals.headerLocked = false;
+
+			System.Drawing.RectangleF mouseRect = new System.Drawing.RectangleF (Globals.mouseRect.Position.X, Globals.mouseRect.Position.Y, Globals.mouseRect.Size.X, Globals.mouseRect.Size.Y);
+
+			Globals.btns.ForEach (delegate(Button btn){
+				if (mouseRect.IntersectsWith(btn.rect)) {
+					btn.Pressed();
+					
+				}
+
+			});
+
+
+
+
 		}
 
 		void MouseButtonPressed ()
@@ -61,6 +75,10 @@ namespace SGUI
 				Globals.mouseOffset = base.InternalGetMousePosition ();
 				Globals.headerLocked = true;
 			}
+
+
+
+
 		}
 
 		void MouseMoved (object sender, MouseMoveEventArgs e)
@@ -87,6 +105,7 @@ namespace SGUI
 
 		void Init()
 		{
+
 			Globals.mouseRect = new RectangleShape (new Vector2f (3f, 3f));
 			Globals.mouseRect.FillColor = Color.White;
 
@@ -144,24 +163,31 @@ namespace SGUI
 
 
 			Globals.btns.Add(new ExitBtn());
-
+			Globals.btns.Add(new SettingsBtn());
 
 			#endregion
+
+			Globals.points.Add ("mainPage", new Vector2f(0,0));
+
+
+			#region MainPage
 
 			#region credits
 			Texture credTex = new Texture("Resources/credits.png");
 			RectangleShape Credits = new RectangleShape(new Vector2f(credTex.Size.X, credTex.Size.Y));
-			//Credits.FillColor = new Color (100-50, 65, 165);
-			//Credits.Position = new Vector2f (0f, 0f);
 			Credits.Texture = credTex;
+			Globals.points.Add("creditsPoint", new Vector2f(0,95));
 			Globals.rects[0].Add ("credits", Credits);
-			AnimatePos ("credits",0, new Vector2f (Globals.width, 95f), new Vector2f (Globals.width-Credits.Size.X,97f), 2f);
+			AnimatePos("creditsPoint", true, new Vector2f (Globals.width-Credits.Size.X, 0f), new Vector2f (Globals.width-Credits.Size.X+1,97f), 2f);
+			//AnimatePos ("credits",0, new Vector2f (Globals.width-Credits.Size.X, 0f), new Vector2f (Globals.width-Credits.Size.X,97f), 2f);
 
 			//Globals.texts.Add("credits", new Text("Hello!!", new Font("Resources/Numans-Regular.ttf"), 14));
 			//Globals.texts["version"].Position = new Vector2f(210f, 60f);
 			//AnimatePos("version", new Vector2f (Globals.width, 60f), new Vector2f (210f,60f), 2f);
 			
+			
 
+			#endregion
 
 			#endregion
 
@@ -169,7 +195,13 @@ namespace SGUI
 
 		void Update()
 		{
+
+
 			Globals.mouseRect.Position = new Vector2f (base.InternalGetMousePosition().X-1f, base.InternalGetMousePosition().Y - 1f);
+
+			if (Globals.shouldClose) {
+				base.Close ();
+			}
 
 			System.Drawing.RectangleF mouseRect = new System.Drawing.RectangleF (Globals.mouseRect.Position.X, Globals.mouseRect.Position.Y, Globals.mouseRect.Size.X, Globals.mouseRect.Size.Y);
 			System.Drawing.RectangleF headerRect = new System.Drawing.RectangleF (Globals.rects[1]["header"].Position.X, Globals.rects[1]["header"].Position.Y, Globals.rects[1]["header"].Size.X, Globals.rects[1]["header"].Size.Y);
@@ -242,6 +274,18 @@ namespace SGUI
 			//Globals.texts ["credits"].Position = new Vector2f (Globals.rects[0]["credits"].Position.X+2f,Globals.rects[0]["credits"].Position.Y+2f);
 			
 
+			Globals.btns.ForEach (delegate(Button btn){
+				btn.Update();
+			});
+
+
+			//LOCKING PAGES
+			//Credits
+			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X, Globals.rects [0] ["credits"].Position.Y);
+			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X,Globals.points ["creditsPoint"].Y + Globals.points ["mainPage"].Y );
+
+
+
 		}
 
 		void Draw()
@@ -249,6 +293,7 @@ namespace SGUI
 			//base.Draw (Globals.rects ["line"]);
 			for (byte i = 0; i < byte.MaxValue; i++) {
 				foreach (var rect in Globals.rects[i]) {
+					//RectangleShape tmpRect = new RectangleShape (rect.Value);
 					base.Draw (rect.Value);
 				}
 			}
@@ -256,12 +301,7 @@ namespace SGUI
 			foreach (var txt in Globals.texts) {
 				base.Draw (txt.Value);
 			}
-
-			//base.Draw (Globals.texts);
-
-			//base.Draw (logo);
-
-			//Globals.btn.Draw (this);
+				
 
 			Globals.btns.ForEach (delegate(Button btn){
 				btn.Draw(this);
@@ -278,15 +318,21 @@ namespace SGUI
 		}
 
 
-		void AnimatePos(string shapeKey, byte layer , Vector2f start, Vector2f stop, float time)
+		public static void AnimatePos(string shapeKey, byte layer , Vector2f start, Vector2f stop, float time)
 		{
 			Thread AnimThread = new Thread (() => Animation.animatePosition(shapeKey,layer,start,stop,time));
 			AnimThread.Start ();
 		}
 
-		void AnimatePos(string textKey , Vector2f start, Vector2f stop, float time)
+		public static void AnimatePos(string textKey , Vector2f start, Vector2f stop, float time)
 		{
 			Thread AnimThread = new Thread (() => Animation.animatePosition(textKey,start,stop,time));
+			AnimThread.Start ();
+		}
+
+		public static void AnimatePos(string pointKey, bool rnd , Vector2f start, Vector2f stop, float time)
+		{
+			Thread AnimThread = new Thread (() => Animation.animatePosition(pointKey, rnd ,start,stop,time));
 			AnimThread.Start ();
 		}
 
