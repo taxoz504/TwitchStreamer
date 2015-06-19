@@ -214,9 +214,12 @@ namespace SGUI
 			Globals.btns.Add(new WatchBtn());
 
 			//In pages
-			//Back button
-			Globals.points.Add("backBtnPoint", new Vector2f(Globals.width*2-115,20));
-			Globals.btns.Add(new BackBtn());
+			//The 2 back button
+			Globals.points.Add("backBtnPoint1", new Vector2f(Globals.width*2-115,20));
+			Globals.btns.Add(new BackBtn(1));
+
+			Globals.points.Add("backBtnPoint2", new Vector2f(-115,20));
+			Globals.btns.Add(new BackBtn(2));
 
 			//Add button
 			Globals.points.Add("addBtnPoint", new Vector2f(0,0));
@@ -225,6 +228,10 @@ namespace SGUI
 			//Delete button
 			Globals.points.Add("deleteBtnPoint", new Vector2f(0,0));
 			Globals.btns.Add(new DeleteBtn());
+
+			//Quality button
+			Globals.points.Add("qualityBtnPoint", new Vector2f(0,0));
+			Globals.btns.Add(new QualityBtn());
 
 			Globals.points.Add("txtNamePoint", new Vector2f(0,0));
 			Globals.txtBoxes.Add(new TextBox ("txtName", new FloatRect (12, 126,250, 26)));
@@ -238,6 +245,10 @@ namespace SGUI
 			Globals.Lbls.Add(new Label("Casters name:", 16, true, "lblNamePoint"));
 			Globals.points.Add("lblNamePoint", new Vector2f(0,0));
 			AnimatePos("lblNamePoint", true, new Vector2f(-300, 104), new Vector2f(12, 104), 2f);
+
+			Globals.Lbls.Add(new Label("Streaming quality:", 16, true, "lblQualityPoint"));
+			Globals.points.Add("lblQualityPoint", new Vector2f(0,0));
+			AnimatePos("lblQualityPoint", true, new Vector2f(-300, 161), new Vector2f(12, 161), 2f);
 
 			#endregion
 
@@ -361,9 +372,11 @@ namespace SGUI
 			//Credits
 			//Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X, Globals.rects [0] ["credits"].Position.Y);
 			Globals.rects [0] ["credits"].Position = new Vector2f(Globals.points ["creditsPoint"].X + Globals.points ["mainPage"].X,Globals.points ["creditsPoint"].Y + Globals.points ["mainPage"].Y );
-			Globals.points["backBtn"] = Globals.points["backBtnPoint"] + Globals.points ["mainPage"];
+			Globals.points["backBtn1"] = Globals.points["backBtnPoint1"] + Globals.points ["mainPage"];
+			Globals.points["backBtn2"] = Globals.points["backBtnPoint2"] + Globals.points ["mainPage"];
 			Globals.points ["addBtn"] = Globals.points ["addBtnPoint"] + Globals.points ["mainPage"];
 			Globals.points ["deleteBtn"] = Globals.points ["deleteBtnPoint"] + Globals.points ["mainPage"];
+			Globals.points ["qualityBtn"] = Globals.points ["qualityBtnPoint"] + Globals.points ["mainPage"];
 			
 
 
@@ -400,7 +413,7 @@ namespace SGUI
 			//Globals.txtBox.Draw (this);
 
 
-			base.Draw (Globals.mouseRect);
+			//base.Draw (Globals.mouseRect);
 
 		}
 
