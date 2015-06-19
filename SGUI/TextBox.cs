@@ -11,7 +11,10 @@ namespace SGUI
 		bool cursorOn = false;
 		public string name;
 		public string text = "";
+		//FIXME: multi character select in textbox
 		public int selectedIndex = 0;
+		public int StartIndex = 0;
+		public int EndIndex = 0;
 		string modText = "";
 		public RectangleShape rect;
 		RectangleShape shadow;
@@ -215,15 +218,18 @@ namespace SGUI
 		{
 			switch (e.Code) {
 			case Keyboard.Key.BackSpace:
-				if (text.Length >= 1) {
-					//text =text.Substring (0, text.Length-1);
-					try {
-						text = text.Remove(selectedIndex-1, 1);
-						selectedIndex--;
-					} catch (Exception ex) {
-						
-					}
+				try {
+					text = text.Remove (selectedIndex - 1, 1);
+					selectedIndex--;
+				} catch (Exception ex) {
 
+				}
+				break;
+			case Keyboard.Key.Delete:
+				try {
+					text = text.Remove (selectedIndex, 1);
+					//selectedIndex++;
+				} catch (Exception ex) {
 
 				}
 				break;

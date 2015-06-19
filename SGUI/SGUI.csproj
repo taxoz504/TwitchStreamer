@@ -59,6 +59,7 @@
     <Compile Include="Buttons\AddBtn.cs" />
     <Compile Include="Buttons\DeleteBtn.cs" />
     <Compile Include="TextBox.cs" />
+    <Compile Include="Label.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

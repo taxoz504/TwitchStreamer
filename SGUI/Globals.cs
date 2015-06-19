@@ -23,6 +23,7 @@ namespace SGUI
 		public static Dictionary<string, Vector2f> points = new Dictionary<string, Vector2f> ();
 		public static List<TextBox> txtBoxes = new List<TextBox> ();
 		public static List<Button> btns = new List<Button>();
+		public static List<Label> Lbls = new List<Label> ();
 		//public static Button btn = new Button("Test", 20,20,100,50);
 		//public static Dictionary<string, TextBox> txtBoxes = new Dictionary<string, TextBox> ();
 

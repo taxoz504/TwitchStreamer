@@ -96,6 +96,7 @@ namespace SGUI
 			{
 				Globals.mouseOffset = base.InternalGetMousePosition ();
 				Globals.headerLocked = true;
+				Globals.lockedControl = "";
 			}
 
 
@@ -232,6 +233,11 @@ namespace SGUI
 			Globals.points.Add("txtAddPoint", new Vector2f(0,0));
 			Globals.txtBoxes.Add(new TextBox ("txtAdd", new FloatRect (425, 152, 101, 26)));
 			AnimatePos("txtAddPoint", true, new Vector2f(Globals.width + 105, 145), new Vector2f(422, 147), 2f);
+
+
+			Globals.Lbls.Add(new Label("Casters name:", 16, true, "lblNamePoint"));
+			Globals.points.Add("lblNamePoint", new Vector2f(0,0));
+			AnimatePos("lblNamePoint", true, new Vector2f(-300, 104), new Vector2f(12, 104), 2f);
 
 			#endregion
 
@@ -378,12 +384,13 @@ namespace SGUI
 			}
 				
 
+			Globals.Lbls.ForEach (delegate(Label lbl){
+				lbl.Draw(this);
+			});
+
 			Globals.txtBoxes.ForEach (delegate(TextBox txt){
 				txt.Draw(this);
 			});
-
-			//Globals.txtBoxes.Values.
-
 
 			Globals.btns.ForEach (delegate(Button btn){
 				btn.Draw(this);
