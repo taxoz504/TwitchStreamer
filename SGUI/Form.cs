@@ -76,6 +76,7 @@ namespace SGUI
 			Globals.txtBoxes.ForEach (delegate(TextBox txt){
 				if (mouseRect.IntersectsWith(new System.Drawing.RectangleF(txt.rect.Position.X, txt.rect.Position.Y, txt.rect.Size.X, txt.rect.Size.Y))) {
 					Globals.lockedControl = txt.name;
+					txt.MouseUp(new Vector2f(mouseRect.Left + 1, mouseRect.Top + 1));
 					//this.SetTitle(Globals.lockedControl);
 				}
 			});
@@ -97,6 +98,15 @@ namespace SGUI
 				Globals.headerLocked = true;
 			}
 
+
+
+			Globals.txtBoxes.ForEach (delegate(TextBox txt){
+				if (mouseRect.IntersectsWith(new System.Drawing.RectangleF(txt.rect.Position.X, txt.rect.Position.Y, txt.rect.Size.X, txt.rect.Size.Y))) {
+					//Globals.lockedControl = txt.name;
+					txt.MouseDown(new Vector2f(mouseRect.Left + 1, mouseRect.Top + 1));
+					//this.SetTitle(Globals.lockedControl);
+				}
+			});
 
 
 
@@ -182,7 +192,7 @@ namespace SGUI
 
 			#endregion
 
-			#region Buttons
+			#region Controls
 			float newpos = Globals.height - 65f;
 
 			RectangleShape line2 = new RectangleShape (new Vector2f (Globals.width, 2));

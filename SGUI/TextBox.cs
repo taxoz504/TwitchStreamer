@@ -8,12 +8,15 @@ namespace SGUI
 	public class TextBox
 	{
 		Clock time;
+		bool cursorOn = false;
 		public string name;
 		public string text = "";
 		public int selectedIndex = 0;
-		public RectangleShape rect;
 		string modText = "";
+		public RectangleShape rect;
 		RectangleShape shadow;
+		RectangleShape cursor;
+		Text TxtDraw;
 
 		public TextBox (string nameID, FloatRect rectangle)
 		{
@@ -29,17 +32,64 @@ namespace SGUI
 			shadow = new RectangleShape (rect);
 			shadow.Texture = new Texture ("Resources/txtShadow1.png");
 
+			cursor = new RectangleShape (new Vector2f (1, 20));
+			cursor.FillColor = Color.Black;
+
+		}
+
+		public void MouseDown(Vector2f mousePos)
+		{
+			float localXpos = mousePos.X - rect.Position.X - 5;
+
+			byte ClosestIndex = 0;
+
+			float ClosestX = 300;
+
+			//Closest char index
+			for (byte i = 0; i <= text.Length; i++) {
+				if (i == 0) {
+					float tmpDist = TxtDraw.FindCharacterPos (i).X - localXpos;
+					if (tmpDist < 0) {
+						tmpDist = -tmpDist;
+					}
+
+					ClosestIndex = 0;
+					ClosestX = tmpDist;
+
+				}else{
+					float tmpDist = TxtDraw.FindCharacterPos (i).X - localXpos;
+					if (tmpDist < 0) {
+						tmpDist = -tmpDist;
+					}
+
+					if (ClosestX > tmpDist) {
+						ClosestX = tmpDist;
+						ClosestIndex = i;
+					}
+
+				}
+			}
+
+			selectedIndex = ClosestIndex;
+		}
+
+		public void MouseUp(Vector2f mousePos)
+		{
+
+
 
 		}
 
 		public void KeyPress(TextEventArgs e)
 		{
 
-			if (e.Unicode != "\b") {
-				//text += e.Unicode;
-				text = text.Insert (selectedIndex, e.Unicode);
-				selectedIndex++;
-			} 
+			if (TxtDraw.FindCharacterPos((uint)text.Length).X <= rect.Size.X - 30) {
+				if (e.Unicode != "\b") {
+					//text += e.Unicode;
+					text = text.Insert (selectedIndex, e.Unicode);
+					selectedIndex++;
+				}
+			}
 
 
 
@@ -193,14 +243,21 @@ namespace SGUI
 		{
 			window.Draw (rect);
 
-			Text tmpTxt = new Text (modText, Globals.mainFont, 20);
-			tmpTxt.Position =  new Vector2f(rect.Position.X + 5f, rect.Position.Y);
-			tmpTxt.Color = Color.Black;
+			TxtDraw = new Text (modText, Globals.mainFont, 20);
+			TxtDraw.Position =  new Vector2f(rect.Position.X + 5f, rect.Position.Y);
+			TxtDraw.Color = Color.Black;
 
-			window.Draw (tmpTxt);
+			window.Draw (TxtDraw);
+
+
+			if (cursorOn) {
+				window.Draw (cursor);
+			}
+
 
 			shadow.Position = rect.Position;
 			window.Draw (shadow);
+
 
 
 
@@ -213,18 +270,25 @@ namespace SGUI
 			//If selected
 			if (Globals.lockedControl == name) {
 				try {
-					
-					modText = text.Insert(selectedIndex, "|");
+					//modText = text.Insert(selectedIndex, "|");
+					modText = text;
+					cursorOn = true;
+					cursor.Position = new Vector2f(
+						TxtDraw.Position.X + TxtDraw.FindCharacterPos((uint)selectedIndex).X, 
+						rect.Position.Y + TxtDraw.FindCharacterPos((uint)selectedIndex).Y + 3);
+
 				} catch (Exception ex) {
 					
 				}
 				//modText = text + "-";
 			}else{
 				modText = text;
+				cursorOn = false;
 			}
 
 
 		}
+
 
 
 	}
