@@ -8,7 +8,7 @@ namespace SGUI
 	{
 
 
-		public AddBtn () : base("Add", (int)Globals.width - 95 - 10, 292 - 61 - 55,95,41)
+		public AddBtn () : base("Add", (int)Globals.width - 95 - 10, 292 - 56 - 55,95,41)
 		{
 			base.xOffset = 62;
 

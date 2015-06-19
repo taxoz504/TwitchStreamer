@@ -229,6 +229,10 @@ namespace SGUI
 			Globals.txtBoxes.Add(new TextBox ("txtName", new FloatRect (12, 126,250, 26)));
 			AnimatePos("txtNamePoint", true, new Vector2f(-260, 126), new Vector2f(12, 126), 2f);
 
+			Globals.points.Add("txtAddPoint", new Vector2f(0,0));
+			Globals.txtBoxes.Add(new TextBox ("txtAdd", new FloatRect (425, 152, 101, 26)));
+			AnimatePos("txtAddPoint", true, new Vector2f(Globals.width + 105, 145), new Vector2f(422, 147), 2f);
+
 			#endregion
 
 			Globals.points.Add ("mainPage", new Vector2f(0,0));

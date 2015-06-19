@@ -31,6 +31,7 @@ namespace SGUI
 
 			shadow = new RectangleShape (rect);
 			shadow.Texture = new Texture ("Resources/txtShadow1.png");
+			shadow.Texture.Smooth = true;
 
 			cursor = new RectangleShape (new Vector2f (1, 20));
 			cursor.FillColor = Color.Black;
@@ -271,11 +272,16 @@ namespace SGUI
 			if (Globals.lockedControl == name) {
 				try {
 					//modText = text.Insert(selectedIndex, "|");
+					//cursor.Position = new Vector2f(cursor.Position.X, cursor.Position.Y + (float)Math.Sin(time.ElapsedTime.AsSeconds()));
+					//cursor.Size = new Vector2f(cursor.Size.X, 2f * (float)Math.Sin(time.ElapsedTime.AsSeconds()));
 					modText = text;
 					cursorOn = true;
 					cursor.Position = new Vector2f(
 						TxtDraw.Position.X + TxtDraw.FindCharacterPos((uint)selectedIndex).X, 
 						rect.Position.Y + TxtDraw.FindCharacterPos((uint)selectedIndex).Y + 3);
+					//cursor.Size = new Vector2f(cursor.Size.X, 20f - (((float)Math.Sin(time.ElapsedTime.AsSeconds()*3f))+1)*5*1.5f);
+
+					cursor.FillColor = new Color(0, 0, 0,  (byte)Math.Round((((Math.Sin(time.ElapsedTime.AsSeconds()*5)+1)/2)*255)));
 
 				} catch (Exception ex) {
 					
